@@ -7,21 +7,47 @@
     <title>Document</title>
     <style>
         * {
-            margin: 0;
             padding: 0;
+            margin: 0;
         }
 
-        .box {
-            width: 400px;
-            margin: 50px auto;
+        .box1 {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
+
+        .box2 {
+            position: absolute;
+            top: 501px;
+            left: 609px;
+            width: 20px;
+            height: 20px;
+            background-color: transparent;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <div class="box">
-        <h2>404 &nbsp;&nbsp;&nbsp;页面掉失了请重新刷新一下</h2>
+    <div class="box1">
+        <img src="./images/01.png" alt="">
+        <div class="box2">
+
+        </div>
     </div>
+    <script>
+
+        //1.获取元素
+        var box2 = document.querySelector('.box2');
+        //2.注册事件
+        box2.onclick = function () {
+            //3.事件处理:
+            //3.1 点击图标跳转页面
+            window.location.href = "./index.html"
+        };
+    </script>
 </body>
 
 </html>
