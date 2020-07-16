@@ -32,10 +32,12 @@ $(function () {
                         $('.modal-body>p').text("登录成功");
                         $('#myModal').modal({ keyboard: true });
                         $('#myModal').on('hidden.bs.modal', function (e) {
+                            //5.1将token存入本地数据
+                            localStorage.setItem("token", backData.token);
                             window.location.href = "./index.html";
                         })
                     } else {
-                        //5.1如果密码和账号错误会提示提示用户
+                        //5.2如果密码和账号错误会提示提示用户
                         $('#myModal').modal({ keyboard: true });
                         $('.modal-body>p').text(backData.msg)
                     }
