@@ -2,7 +2,7 @@
 $(function () {
     //1.页面刚进来就发送ajax
     $.ajax({
-        url: "http://localhost:8080/api/v1/admin/user/info",
+        url: BigNew.user_info,
         type: "get",
         dataType: "json",
         success: function (backData) {
@@ -29,6 +29,18 @@ $(function () {
             $('.level02').slideToggle();
             //3.2切换类名 后代选择器 判断有没有这个类名 
             $(this).find("b").toggleClass("rotate0");
+            //3.3点击level02触发 level02的ul>li>a默选择第一个a
+            $('.level02>li:eq(0) a')[0].click();
+        } else {
+            $('.level02>li').removeClass('active');
         }
+    })
+    //4.点击level02的a标签变颜色
+    $('.user_center_link>a').on('click', function () {
+        $("#user").addClass('active').siblings().removeClass('active');
+    })
+    //5.点击level02的a变颜色
+    $('.level02>li').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
     })
 })
