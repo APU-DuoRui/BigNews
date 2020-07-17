@@ -67,6 +67,16 @@
             </form>
         </div>
     </div>
+    <script src="./libs/http.js"></script>
+    <!-- 模板 -->
+    <script id="cat_list" type="text/html">
+
+        {{each data $value}}
+        <option value="{{$value.id}}">{{$value.name}}</option>
+        {{/each }}
+
+    </script>
+    <script src="./js/article_edit.js"></script>
 </body>
 
 </html>
