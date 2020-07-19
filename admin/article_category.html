@@ -73,8 +73,10 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-cancel" data-toggle="modal" data-target="#myModal">取消</button>
-                    <button type="button" class="btn btn-primary btn-confirm" data-toggle="modal" data-target="#myModal">确认</button>
+                    <button type="button" class="btn btn-default btn-cancel" data-toggle="modal"
+                        data-target="#myModal">取消</button>
+                    <button type="button" class="btn btn-primary btn-confirm" data-toggle="modal"
+                        data-target="#myModal">确认</button>
                 </div>
             </div>
         </div>
@@ -84,19 +86,6 @@
 <!-- 引入封装好的接口 -->
 <script src="./libs/http.js"></script>
 <!-- 创建模板 -->
-<!-- <script id="article" type="text/html">
-    {{each data $value}}
-    <tr>
-    <td>{{$value.name}}</td>
-    <td>{{$value.slug}}</td>
-    <td class="text-center">
-        <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal""
-            class=" btn btn-info btn-xs" data-id="{{$value.id }}">编辑</a>
-        <a href="javascript:void(0)" data-toggle="modal" class="btn btn-danger btn-xs btn-delete" data-id="{{ $value.id }}">删除</a>
-    </td>
-</tr>
-    {{/each}}
-</script> -->
 <script id="article" type="text/html">
     {{ each data v }}
     <tr>
