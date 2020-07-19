@@ -13,6 +13,8 @@
     <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 引入模板引擎js文件 -->
     <script src="./libs/template-web.js"></script>
+    <!-- 引入分页插件 -->
+    <script src="./libs/jquery.twbsPagination.js"></script>
 </head>
 
 <body>
@@ -69,9 +71,36 @@
                 </tbody>
             </table>
             <div class="row text-center">
+                <ul id="pagination" class="paginaton-sm"></ul>
             </div>
         </div>
     </div>
+    <!-- 引入封装好的接口 -->
+    <script src="./libs/http.js"></script>
+    <!-- 01创建一个模板 -->
+    <script id="atc_list" type="text/html">
+        <option value="">所有分类</option>
+        {{each data}}
+        <option value="{{$value.id}}">{{$value.name}}</option>
+        {{/each}}
+    </script>
+    <!-- 02-模板 -->
+    <script id="filtrate_list" type="text/html">
+    {{each data.data v}}
+    <tr>
+        <td>{{v.title}}</td>
+        <td>{{v.author}}</td>
+        <td>{{v.category}}</td>
+        <td class="text-center">{{v.date}}</td>
+        <td class="text-center">{{v.state}}</td>
+        <td class="text-center">
+            <a data-id="{{v.id}}" href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
+            <a data-id="{{v.id}}" href="javascript:void(0);" class="btn btn-danger btn-xs delete">删除</a>
+        </td>
+    </tr>
+    {{/each}}
+    </script>
+    <script src="./js/article_list.js"></script>
 </body>
 
 </html>

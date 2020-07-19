@@ -14,39 +14,40 @@ $(function () {
     //需求2 模态框出现之前
     $('#myModal').on('show.bs.modal', function (e) {
         //2.1获取模态框事件触发源 (相关的目标)
-        var target = e.relatedTarget;
+        console.log(e.relatedTarget);
+        var target = $(e.relatedTarget);
         //2.2执行模态框新建分类逻辑
-        if (target == $('#xinzengfenlei')[0]) {
-            //执行新增分类逻辑
-            //(1)设置按钮文本为新增
-            $("#myModal .confirm").text('新增');
+        if (target.text() == "新增分类") {
+            //执行新增成功分类逻辑
+            //(1)设置按钮文本为新增成功
+            $(".btn-confirm").text('新增');
         } else {
             //执行编辑分类文本为
             //(1)设置按钮文本为编逻
-            $('#myModal .confirm').text('编辑');
+            $('.btn-confirm').text('编辑');
             //(2)取出当前按钮所在按钮的tr的name值赋值给模态框的表单
-            $('#recipient-name').val($(target).parent().prev().prev().text())
+            $('#recipient-name').val(target.parent().prev().prev().text())
             //(3)取出当前按钮所在的tr的slug赋值给模态框的表单
-            $('#message-text').val($(target).parent().prev().text());
+            $('#message-text').val(target.parent().prev().text());
             //(4)取出当前按钮所在的自定义属性data-id赋值给模态框编辑按钮的自定义属性data-id
-            $('#myModal .confirm').attr('data-id', $(target).attr('data-id'));
+            $('.btn-confirm').attr('data-id', target.attr('data-id'));
         }
     });
 
     //2.取消按钮点击事件
-    $('#myModal .cancel').on('click', function () {
+    $('.btn-cancel').on('click', function (e) {
         //2.1清空文本框数据  : 这个 DOM原生的方法
         $('#form')[0].reset();
         //2.2隐藏模态框
         $('#myModal').modal('hied');
     });
     //3确认按钮点击事件
-    $('#myModal .confirm').on('click', function () {
+    $('.btn-confirm').on('click', function (e, a) {
         //3.1判断是不是当前点击
         if ($(this).text() == "新增") {
             $.ajax({
                 url: BigNew.category_add,
-                type: "post",
+                type: 'post',
                 dataType: "json",
                 data: {
                     name: $("#recipient-name").val(),
@@ -54,7 +55,7 @@ $(function () {
                 },
                 success: function (backData) {
                     console.log(backData);
-                    if (backData.code == 200) {
+                    if (backData.code == 201) {
                         alert("新增成功");
                         window.location.reload();
                     } else {
@@ -68,7 +69,7 @@ $(function () {
         } else {
             //4 .编辑 
             $.ajax({
-                url: bigNew.category_edit,
+                url: BigNew.category_edit,
                 type: "post",
                 dataType: "json",
                 data: {
@@ -89,28 +90,28 @@ $(function () {
                 }
             })
         }
-
-        //4删除按钮  注意点这里是数据委托注册
-        $('.category_table>tbody').on('click', "delete", function () {
-            //4.发送ajax请求
-            $.ajax({
-                url: BigNew.category_delete,
-                type: "post",
-                dataType: "json",
-                data: {
-                    id: $(this).attr('data-id'),
-                },
-                success: function (backData) {
-                    console.log(backData);
-                    //4.2判断是不是204
-                    if (backData.code == 204) {
-                        alert('删除成功');
-                        window.location.reload();
-                    } else {
-                        alert(backData.msg);
-                    }
+    })
+    //4删除按钮  注意点这里是数据委托注册
+    $('table>tbody').on('click', ".btn-delete", function () {
+        //4.发送ajax请求
+        $.ajax({
+            url: BigNew.category_delete,
+            type: "post",
+            dataType: "json",
+            data: {
+                id: $(this).attr('data-id'),
+            },
+            success: function (backData) {
+                console.log(backData);
+                //4.2判断是不是204
+                if (backData.code == 204) {
+                    alert('删除成功');
+                    window.location.reload();
+                } else {
+                    alert(backData.msg);
                 }
-            })
+            }
         })
     })
+
 })

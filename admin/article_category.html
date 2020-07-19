@@ -51,21 +51,64 @@
             </table>
         </div>
     </div>
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">新增分类</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">分类名称:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">分类别名:</label>
+                            <input class="form-control" id="message-text" name="slug">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-cancel" data-toggle="modal" data-target="#myModal">取消</button>
+                    <button type="button" class="btn btn-primary btn-confirm" data-toggle="modal" data-target="#myModal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <!-- 引入封装好的接口 -->
 <script src="./libs/http.js"></script>
 <!-- 创建模板 -->
-<script id="article" type="text/html">
+<!-- <script id="article" type="text/html">
     {{each data $value}}
     <tr>
     <td>{{$value.name}}</td>
     <td>{{$value.slug}}</td>
     <td class="text-center">
-        <a href="javascript:void(0);" data-toggle="modal" class=" btn btn-info btn-xs" data-target="#myModal" data-id="{{ $value.id }}">编辑</a>
-        <a href="javascript:void(0);" class="btn btn-danger btn-xs" data-id="{{$value.id}}">删除</a>
+        <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal""
+            class=" btn btn-info btn-xs" data-id="{{$value.id }}">编辑</a>
+        <a href="javascript:void(0)" data-toggle="modal" class="btn btn-danger btn-xs btn-delete" data-id="{{ $value.id }}">删除</a>
     </td>
 </tr>
     {{/each}}
+</script> -->
+<script id="article" type="text/html">
+    {{ each data v }}
+    <tr>
+        <td>{{ v.name }}</td>
+        <td>{{ v.slug }}</td>
+        <td class="text-center">
+                           <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal""
+ class=" btn btn-info btn-xs" data-id="{{ v.id }}">编辑</a>
+            <a href="javascript:void(0)" class="btn btn-danger btn-xs btn-delete" data-id="{{ v.id }}"">删除</a>
+        </td>
+    </tr>
+    {{ /each }}
 </script>
 <!-- 引入自己写好的article_category -->
 <script src="./js/article_category.js"></script>
